@@ -10,7 +10,10 @@ class BooksApp extends React.Component {
 
   constructor(props){
     super(props);
-    this.state = {books:[]};
+    this.state = {
+      books:[],
+      bookssearch:[]
+    };
   }
 
   componentDidMount(){
@@ -28,13 +31,19 @@ class BooksApp extends React.Component {
   changeShelfSelected(book, shelf){
     BooksAPI.update(book, shelf)
   }
+
+  searchBook = (searchTerm) => {
+    BooksAPI.search(searchTerm).then((bookssearch) =>{
+      this.setState({bookssearch})
+    })
+  }
   
 
   render() {
     return (
       <div className="app">
           <Route exact path="/search" render={({ history }) => (
-            <BookSearch />
+            <BookSearch onSearch={this.searchBook} bookssearch={this.state.bookssearch} changeShelf={this.changeShelfSelected}/>
           )}/>
            
           <Route exact path="/" render={() => (

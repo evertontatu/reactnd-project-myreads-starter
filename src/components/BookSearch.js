@@ -1,20 +1,52 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
+import Book from './Book'
+
 
 class BookSearch extends Component{
+
+  constructor(props){
+    super(props);
+    this.state = {
+      searchTerm: '',
+    };
+  }
+
+  searchHandler = e => {
+    this.setState({searchTerm: e.target.value }, () =>{
+      this.props.onSearch(this.state.searchTerm)
+    })
+  }
+
+  onChangeShelf = (book, shelf) => {
+    this.props.changeShelf(book, shelf)
+  }
+
   render(){
+    const { bookssearch } = this.props
     return(
       <div className="search-books">
         <div className="search-books-bar">
           <Link to="/" className="close-search">Close</Link>
           <div className="search-books-input-wrapper">
             
-            <input type="text" placeholder="Search by title or author"/>
-
+            <input type="text" placeholder="Search by title or author" onChange={this.searchHandler}/>
+            
           </div>
+          
         </div>
+        
         <div className="search-books-results">
-          <ol className="books-grid"></ol>
+          <ol className="books-grid">
+            <p>{this.state.searchTerm}</p>
+            <div className="bookshelf-books">
+              <ol className="books-grid">
+                {bookssearch.map(bookss =>
+                  <Book book={bookss} key={bookss.id} onSelected={this.onChangeShelf}/>
+                )}
+              </ol>
+            </div>
+          </ol>
         </div>
       </div>
     )
