@@ -13,9 +13,13 @@ class BookSearch extends Component{
   }
 
   searchHandler = e => {
-    this.setState({searchTerm: e.target.value }, () =>{
-      this.props.onSearch(this.state.searchTerm)
-    })
+    if (e.target.value === ''){
+      this.props.onResetSearch()
+    } else {
+      this.setState({searchTerm: e.target.value }, () =>{
+        this.props.onSearch(this.state.searchTerm)
+      })
+    }
   }
 
   onChangeShelf = (book, shelf) => {
@@ -38,7 +42,6 @@ class BookSearch extends Component{
         
         <div className="search-books-results">
           <ol className="books-grid">
-            <p>{this.state.searchTerm}</p>
             <div className="bookshelf-books">
               <ol className="books-grid">
                 {bookssearch.map(bookss =>

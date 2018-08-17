@@ -16,13 +16,31 @@ class BooksApp extends React.Component {
     };
   }
 
-  componentDidMount(){
+  componentWillMount(){
     BooksAPI.getAll().then((books) =>{
       this.setState({books})
     })
   }
 
+  shouldComponentUpdate(nextProps, nextState) {
+    console.log(nextProps)
+    let shouldUpdate = this.props.books !== nextProps.status;
+    return shouldUpdate;
+  }
+
   componentWillUpdate(){
+    console.log('nice')
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (this.props.status !== nextProps.status) {
+      this.setState({
+        state: nextProps.status
+      });
+    }
+  }
+
+  vaialio(){
     BooksAPI.getAll().then((books) =>{
       this.setState({books})
     })
@@ -34,8 +52,16 @@ class BooksApp extends React.Component {
 
   searchBook = (searchTerm) => {
     BooksAPI.search(searchTerm).then((bookssearch) =>{
-      this.setState({bookssearch})
+      if (bookssearch.error === 'empty query'){
+        this.setState({bookssearch: []})
+      } else {
+        this.setState({bookssearch})
+      }
     })
+  }
+
+  resetSearch = () => {
+    this.setState({bookssearch: []})
   }
   
 
@@ -43,7 +69,12 @@ class BooksApp extends React.Component {
     return (
       <div className="app">
           <Route exact path="/search" render={({ history }) => (
-            <BookSearch onSearch={this.searchBook} bookssearch={this.state.bookssearch} changeShelf={this.changeShelfSelected}/>
+            <BookSearch 
+              onSearch={this.searchBook} 
+              bookssearch={this.state.bookssearch} 
+              changeShelf={this.changeShelfSelected}
+              onResetSearch={this.resetSearch}
+            />
           )}/>
            
           <Route exact path="/" render={() => (
