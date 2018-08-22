@@ -14,17 +14,12 @@ class Book extends Component{
           <div className="book-top">
             <div className="book-cover" style={{ width: 128, height: 193, backgroundImage: 'url('+book.imageLinks.smallThumbnail+')' }}></div>
             <div className="book-shelf-changer">
-              <select onChange={this.onHandle.bind(this, book)}>
+              <select onChange={this.onHandle.bind(this, book)} value={book.shelf}>
                 <option value="move" disabled>Move to...</option>
-                
-                {book.shelf}
-                {console.log(book.shelf)}
                   <option value="currentlyReading" >Currently Reading</option>
                   <option value="wantToRead">Want to Read</option>
-                  <option value="read" selected>Read</option>
+                  <option value="read">Read</option>
                   <option value="none">None</option>
-
-
               </select>
             </div>
           </div>

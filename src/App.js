@@ -22,25 +22,7 @@ class BooksApp extends React.Component {
     })
   }
 
-  shouldComponentUpdate(nextProps, nextState) {
-    console.log(nextProps)
-    let shouldUpdate = this.props.books !== nextProps.status;
-    return shouldUpdate;
-  }
-
-  componentWillUpdate(){
-    console.log('nice')
-  }
-
-  componentWillReceiveProps(nextProps) {
-    if (this.props.status !== nextProps.status) {
-      this.setState({
-        state: nextProps.status
-      });
-    }
-  }
-
-  vaialio(){
+  componentDidUpdate(){
     BooksAPI.getAll().then((books) =>{
       this.setState({books})
     })
