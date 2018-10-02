@@ -22,7 +22,7 @@ class BooksApp extends React.Component {
     })
   }
 
-  componentDidUpdate(){
+  componentWillReceiveProps(nextProps){
     BooksAPI.getAll().then((books) =>{
       this.setState({books})
     })
