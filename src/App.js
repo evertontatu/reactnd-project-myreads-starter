@@ -22,11 +22,7 @@ class BooksApp extends React.Component {
     })
   }
 
-  componentDidUpdate(){
-    BooksAPI.getAll().then((books) =>{
-      this.setState({books})
-    })
-  }
+
 
   changeShelfSelected(book, shelf){
     BooksAPI.update(book, shelf)
