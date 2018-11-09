@@ -17,7 +17,6 @@ class Book extends Component{
       this.state.imageLink = 'images/imagem-nao-disponivel.jpg';
     } else {
       this.state.imageLink = book.imageLinks.smallThumbnail;
-      console.log(this.state.imageLink);
     }
 
     return(
@@ -27,12 +26,12 @@ class Book extends Component{
             <div className="book-cover" style={{ width: 128, height: 193, backgroundImage: 'url('+this.state.imageLink+')', backgroundRepeat: 'no-repeat',
     backgroundSize: 'cover' }}></div>
             <div className="book-shelf-changer">
-              <select onChange={this.onHandle.bind(this, book)} value={book.shelf}>  
+              <select onChange={this.onHandle.bind(this, book)} value={book.shelf}>
                 <option value="move" disabled>Move to...</option>
-                  <option value="currentlyReading" >Currently Reading</option>
-                  <option value="wantToRead">Want to Read</option>
-                  <option value="read">Read</option>
-                  <option value="none">None</option>
+                <option value="currentlyReading" >Currently Reading</option>
+                <option value="wantToRead">Want to Read</option>
+                <option value="read">Read</option>
+                <option value="none">None</option>
               </select>
             </div>
           </div>

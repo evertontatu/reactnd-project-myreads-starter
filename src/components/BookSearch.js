@@ -28,6 +28,8 @@ class BookSearch extends Component{
 
   render(){
     const { bookssearch } = this.props
+    const { books } = this.props
+    console.log(books)
     return(
       <div className="search-books">
         <div className="search-books-bar">
