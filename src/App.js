@@ -22,9 +22,17 @@ class BooksApp extends React.Component {
     })
   }
 
-  changeShelfSelected(book, shelf){
-    BooksAPI.update(book, shelf)
+  updateList = () => {
+    BooksAPI.getAll().then((books) =>{
+      this.setState({books})
+    }).catch(error => console.log(error));
   }
+
+  changeShelfSelected = (book, shelf) => {
+    BooksAPI.update(book, shelf).then(() => {
+      this.updateList()
+    }).catch(error => console.log(error));
+  };
 
   searchBook = (searchTerm) => {
     BooksAPI.search(searchTerm).then((bookssearch) =>{

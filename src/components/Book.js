@@ -26,7 +26,7 @@ class Book extends Component{
             <div className="book-cover" style={{ width: 128, height: 193, backgroundImage: 'url('+this.state.imageLink+')', backgroundRepeat: 'no-repeat',
     backgroundSize: 'cover' }}></div>
             <div className="book-shelf-changer">
-              <select onChange={this.onHandle.bind(this, book)} value={book.shelf}>
+              <select onChange={this.onHandle.bind(this, book)} value={book.shelf ? book.shelf : 'none'}>
                 <option value="move" disabled>Move to...</option>
                 <option value="currentlyReading" >Currently Reading</option>
                 <option value="wantToRead">Want to Read</option>
