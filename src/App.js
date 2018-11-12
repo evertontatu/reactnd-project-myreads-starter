@@ -22,12 +22,6 @@ class BooksApp extends React.Component {
     })
   }
 
-  componentWillReceiveProps(nextProps){
-    BooksAPI.getAll().then((books) =>{
-      this.setState({books})
-    })
-  }
-
   changeShelfSelected(book, shelf){
     BooksAPI.update(book, shelf)
   }
@@ -52,6 +46,7 @@ class BooksApp extends React.Component {
       <div className="app">
           <Route exact path="/search" render={({ history }) => (
             <BookSearch 
+              books={this.state.books}
               onSearch={this.searchBook} 
               bookssearch={this.state.bookssearch} 
               changeShelf={this.changeShelfSelected}

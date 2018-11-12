@@ -28,6 +28,8 @@ class BookSearch extends Component{
 
   render(){
     const { bookssearch } = this.props
+    const { books } = this.props
+
     return(
       <div className="search-books">
         <div className="search-books-bar">
@@ -44,9 +46,27 @@ class BookSearch extends Component{
           <ol className="books-grid">
             <div className="bookshelf-books">
               <ol className="books-grid">
-                {bookssearch.map(bookss =>
-                  <Book book={bookss} key={bookss.id} onSelected={this.onChangeShelf}/>
-                )}
+
+                {bookssearch.map(bookss => {
+                  if (books.find(book => book.id === bookss.id)){
+                    let bookfind = books.find(book => book.id === bookss.id)
+                    return (
+                      <Book
+                        book={bookfind}
+                        key={bookfind.id}
+                        onSelected={this.onChangeShelf}
+                      />
+                    )
+                  } else {
+                    return (
+                      <Book
+                        book={bookss}
+                        key={bookss.id}
+                        onSelected={this.onChangeShelf}
+                      />
+                    )
+                  }
+                })}
               </ol>
             </div>
           </ol>

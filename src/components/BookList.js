@@ -4,7 +4,6 @@ import Book from './Book'
 
 class BookList extends Component{
 
-
   onChangeShelf = (book, shelf) => {
     this.props.changeShelf(book, shelf)
   }
@@ -24,15 +23,14 @@ class BookList extends Component{
                   <div className="bookshelf-books">
                     <ol className="books-grid">
                       {books.filter(book => book.shelf === 'currentlyReading')
-                        .map(book => 
-                          <Book 
-                            book={book} 
-                            key={book.id} 
+                        .map(book =>
+                          <Book
+                            book={book}
+                            key={book.id}
                             onSelected={this.onChangeShelf}
                           />
                         )
                       }
-                      
                     </ol>
                   </div>
                 </div>
